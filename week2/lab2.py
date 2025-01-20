@@ -11,11 +11,32 @@ weapons = ["Fist", "Knife", "Club", "Gun", "Bomb", "Nuclear Bomb"]
 
 input("Roll the dice for your weapon (Press enter)")
 weaponRoll = random.choice(diceOptions)
-print("You rolled the " + str(weapons[weaponRoll]) + "!")
+print("You rolled the " + str(weapons[weaponRoll-1]) + "!")
+if weaponRoll <= 2:
+    print("You rolled a weak weapon, friend")
+elif weaponRoll <= 4:
+    print("Your weapon is meh")
+else:
+    print("Nice weapon, friend!")
 
-combatStrength = int(input("Enter your combat Strength: "))
+if weaponRoll != 1:
+    print("Thank goodness you didn't roll the Fist...")
+
+while True:
+    try:
+        combatStrength = int(input("Enter your combat Strength: "))
+    except ValueError:
+        print("That's not a number! Try again!")
+    else:
+        break
 combatStrength += weaponRoll
-mCombatStrength = int(input("Enter the monster's combat Strength: "))
+while True:
+    try:
+        mCombatStrength = int(input("Enter the monster's combat Strength: "))
+    except ValueError:
+        print("That's not a number! Try again!")
+    else:
+        break
 
 input("Roll the dice for your health points (Press enter)")
 healthPoints = random.choice(diceOptions)
@@ -69,7 +90,7 @@ else:
 print("You meet the monster. FIGHT!!")
 input("You strike first (Press enter)")
 
-print("Your sword (" + str(combatStrength) + ") ---> Monster (" + str(mHealthPoints) + ")")
+print("Your " + str(weapons[weaponRoll-1]) + " (" + str(combatStrength) + ") ---> Monster (" + str(mHealthPoints) + ")")
 if combatStrength >= mHealthPoints:
     mHealthPoints = 0
     print("You've killed the monster")
